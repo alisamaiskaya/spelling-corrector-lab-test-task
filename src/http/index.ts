@@ -27,12 +27,16 @@ const HTTPServer = http.createServer(async (
     headers,
   } = await multipartParse(req);
 
-  const filename = getFilename(headers);
+  if (req.method === 'POST' && req.url === '/file') {
+    const filename = getFilename(headers);
 
-  const correctedText = correctText(body);
+    const correctedText = correctText(body);
 
-  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-  res.write(correctedText);
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.write(correctedText);
+  } else {
+    res.statusCode = 404;
+  }
 
   res.end();
 });
