@@ -42,6 +42,10 @@ export function multipartParse(stream: Readable): Promise<File> {
     let endBodyIndex: number = 0;
 
     stream.on('data', (chunk: Buffer) => {
+      // This code will work for only one file
+      if (stage === ParsingStages.END) {
+        return;
+      }
       const stringChunk = chunk.toString();
 
       for (let i = 0; i < stringChunk.length; i += 1) {
