@@ -1,5 +1,6 @@
 # spelling-corrector
 Simple words corrector based on static dictionary's data.
+It works for only one text file.
 
 # Usage
 ## Installation and running
